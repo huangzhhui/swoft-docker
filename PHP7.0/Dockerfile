@@ -45,6 +45,12 @@ RUN wget https://github.com/swoole/swoole-src/archive/v2.0.10-beta.tar.gz -O swo
 RUN pecl install inotify \
     && docker-php-ext-enable inotify
 
+RUN git clone https://github.com/swoft-cloud/swoft.git /var/www/swoft
+WORKDIR /var/www/swoft
+RUN composer install --no-dev \
+    && composer dump-autoload -o \
+    && composer clearcache
+
 EXPOSE 80
 
 CMD ["/bin/bash"]
