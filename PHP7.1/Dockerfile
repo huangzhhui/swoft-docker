@@ -51,8 +51,7 @@ RUN wget https://github.com/swoole/swoole-src/archive/v2.1.2.tar.gz -O swoole.ta
     && rm -r swoole \
     && docker-php-ext-enable swoole
 
-ADD . /var/www/swoft
-
+RUN git clone https://github.com/swoft-cloud/swoft.git /var/www/swoft
 WORKDIR /var/www/swoft
 RUN composer install --no-dev \
     && composer dump-autoload -o \
@@ -60,4 +59,4 @@ RUN composer install --no-dev \
 
 EXPOSE 80
 
-CMD ["php", "/var/www/swoft/bin/swoft", "start"]
+CMD ["/bin/bash"]
